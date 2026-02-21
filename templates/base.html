@@ -4,6 +4,18 @@
         <title>{% block title %}Bookstore{% endblock title %}</title>
     </head>
     <body>
+        <div>
+            {% if user.is_authenticated %}
+                <p> Hi {{ user.username }}</p>
+                <form action="{% url 'logout' %}" method="post"> {% csrf_token %}
+                    <button type="submit">log out</button>
+                </form>
+            {% else %}
+                <p> you are not loged in</p>
+                <p><a href="{% url 'login' %}">Log In</a></p>
+                <p><a href="{% url 'signup' %}">Sign Up</a></p>
+            {% endif %}
+
         <div class="container">
             {% block content %}
             {% endblock content %}
