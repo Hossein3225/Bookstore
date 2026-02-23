@@ -1,24 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}Bookstore{% endblock title %}</title>
+        <title>{% block title %}Bookstore{% endblock %}</title>
+        <!-- Bootstrap CSS -->
+            {% load bootstrap5 %}
+            {% bootstrap_css %}
+            {% bootstrap_javascript %}
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
     </head>
     <body>
-        <div>
-            {% if user.is_authenticated %}
-                <p> Hi {{ user.username }}</p>
-                <form action="{% url 'logout' %}" method="post"> {% csrf_token %}
-                    <button type="submit">log out</button>
-                </form>
-            {% else %}
-                <p> you are not loged in</p>
-                <p><a href="{% url 'login' %}">Log In</a></p>
-                <p><a href="{% url 'signup' %}">Sign Up</a></p>
-            {% endif %}
-
-        <div class="container">
-            {% block content %}
-            {% endblock content %}
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">Bookstore</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-targ\et="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Tog\gle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" >
+                                <form action="{% url 'logout' %}" method="post"> {% csrf_token %}
+                                    <button class="btn btn-success" type="submit">log out</button>
+                                </form>
+                            </a>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class ="container">
+            {% block content %}{% endblock content %}
         </div>
+        <!-- JavaScript -->
+        <script src="{% static 'js/base.js' %}"></script>
     </body>
 </html>
