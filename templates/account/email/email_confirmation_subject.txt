@@ -1,0 +1,7 @@
+{% load i18n %} 
+{% comment %} this is for support multiple languages {% endcomment %}
+{% autoescape off %}
+{% comment %} this tag protevts against security assues. {% endcomment %}
+{% blocktrans %}Please confirm youre Gmail/Email address{% endblocktrans %}
+{% comment %} this tag for support translations. {% endcomment %}
+{% endautoescape %}

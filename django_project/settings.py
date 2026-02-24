@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "bootstrap5",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django.contrib.sites",  
     "allauth",
     "allauth.account",
     # local
@@ -168,3 +169,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+DEFAULT_FORM_EMAIL = "admin@djangobookstore.com"
