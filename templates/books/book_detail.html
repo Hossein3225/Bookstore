@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Book Detail{% endblock title %}
+{% block title %}{{ book.title  }}{% endblock title %}
 
 {% block content %}
 
@@ -9,5 +9,12 @@
         <p>writed by: {{ book.author }}</p>
         <p>price = ${{ object.price }}</p>
     </div>
-
+    <div>
+        <h3>Reviews</h3>
+        <ul>
+            {% for review in book.reviews.all %}
+            <li>{{ review.author }}: {{ review.review }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock content %}
