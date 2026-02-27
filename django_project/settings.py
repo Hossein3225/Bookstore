@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from environs import Env
-import os
 
 env = Env()
 env.read_env()
@@ -49,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",  
     "allauth",
     "allauth.account",
+    "debug_toolbar",
     # local
     'accounts',
     "pages",
@@ -85,6 +85,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #allauth mifflewere
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -176,3 +177,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 DEFAULT_FORM_EMAIL = "admin@djangobookstore.com"
+
+# debug_toolbar config
+import socket
+hostname , _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
